@@ -1,0 +1,2 @@
+# This project uses only Python Standard Library (tkinter, difflib, re, os, threading)
+# No external dependencies required.
