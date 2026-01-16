@@ -21,29 +21,6 @@ def check_phishing(text):
                 return True, domain, int(ratio*100)
     return False, None, 0
 
-import tkinter as tk
-from tkinter import font
-import threading
-import time
-import os
-import difflib
-import re
-
-LOG_FILE = 'dotaexp_logs.txt'
-WHITELIST = ['steamcommunity.com', 'steampowered.com', 'dota2.com']
-root = None
-
-def check_phishing(text):
-    urls = re.findall(r'(https?://[^\s/]+)', text)
-    for url in urls:
-        domain = url.replace('https://', '').replace('http://', '').split('/')[0]
-        if domain in WHITELIST: continue
-        for white in WHITELIST:
-            ratio = difflib.SequenceMatcher(None, domain, white).ratio()
-            if 0.75 <= ratio < 1.0:
-                return True, domain, int(ratio*100)
-    return False, None, 0
-
 def _create_alert(text, target, score):
     alert = tk.Toplevel(root)
     alert.title("SECURITY ALERT")
